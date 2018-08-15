@@ -11,32 +11,31 @@ const app = express();
 // const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
 
 // Mac:
-// const conString = 'postgres://localhost:5432';
+const conString = 'postgres://localhost:5432/lab08';
+const client = new pg.Client(conString);
 
-const client = new pg.Client();
-
-// REVIEW: Use the client object to connect to our DB.
+// REVIEWED: Use the client object to connect to our DB.
 client.connect();
 
 
-// REVIEW: Install the middleware plugins so that our app can parse the request body
+// REVIEWED: Install the middleware plugins so that our app can parse the request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 
 
-// REVIEW: Routes for requesting HTML resources
+// REVIEWED: Routes for requesting HTML resources
 app.get('/new-article', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js, if any, is interacting with this particular piece of `server.js`? What part of CRUD, if any, is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE
+  // This corresponds to number five on the full-stack-diagram. This is the READ procedure of CRUD.
   response.sendFile('new.html', { root: './public' });
 });
 
 
-// REVIEW: Routes for making API calls to use CRUD Operations on our database
+// REVIEWED: Routes for making API calls to use CRUD Operations on our database
 app.get('/articles', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE
+  // This code corresponds to number three on the full-stack-diagram.
   client.query('')
     .then(function(result) {
       response.send(result.rows);
