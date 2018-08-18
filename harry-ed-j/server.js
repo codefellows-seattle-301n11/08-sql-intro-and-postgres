@@ -12,7 +12,7 @@ const app = express();
 
 // PC: Ed and Harry 
 // const conString = 'postgres://user:PASSWORD@HOST:PORT/DBNAME';
-const conString = 'postgres://postgres:My1004CF@HOST:PORT/lab_08';
+const conString = 'postgres://postgres:My1004CF@HOST:PORT/Lab08';
 
 // Mac: J 
 // const conString = 'postgres://localhost:5432/lab_08';
