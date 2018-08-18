@@ -84,8 +84,16 @@ app.put('/articles/:id', (request, response) => {
   // Code: Article.updateRecord();
   // CRUD: UPDATE
 
-  let SQL = `UPDATE articles WHERE article_id=$1;`;
-  let values = [request.params.id];
+  let SQL = `UPDATE articles SET title=$1, author=$2, author_url=$3, category=$4, published_on=$5, body=$6 WHERE article_id=$7;`;
+  let values = [
+    request.body.title,
+    request.body.author,
+    request.body.author_url,
+    request.body.category,
+    request.body.published_on,
+    request.body.body,
+    request.params.id
+  ];
 
   client.query(SQL, values)
     .then(() => {
