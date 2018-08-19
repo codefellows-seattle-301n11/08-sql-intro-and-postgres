@@ -12,7 +12,7 @@ const app = express();
 
 // PC: Ed and Harry 
 // const conString = 'postgres://user:PASSWORD@HOST:PORT/DBNAME';
-const conString = 'postgres://postgres:My1004CF@HOST:PORT/Lab08';
+const conString = 'postgres://postgres:My1004CF@localhost:5432/lab08';
 
 // Mac: J 
 // const conString = 'postgres://localhost:5432/lab_08';
@@ -41,7 +41,7 @@ app.get('/new-article', (request, response) => {
 app.get('/articles', (request, response) => {
     // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
     // PUT YOUR RESPONSE HERE
-    client.query('')
+    client.query('SELECT * FROM articles')
         .then(function(result) {
             response.send(result.rows);
         })

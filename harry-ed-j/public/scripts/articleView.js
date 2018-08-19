@@ -104,8 +104,9 @@ articleView.create = () => {
     hljs.highlightBlock(block);
   });
 
-  $('#export-field').show();
-  $('#article-json').val(`${JSON.stringify(article)},`);
+  //DONE - hh removing articleView.js via json as data is now reflected on database...
+  // $('#export-field').show();
+  // $('#article-json').val(`${JSON.stringify(article)},`);
 };
 
 articleView.submit = event => {
