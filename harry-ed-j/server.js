@@ -86,7 +86,7 @@ app.put('/articles/:article_id', (request, response) => {
 
   let SQL = `
   UPDATE articles;(title, author, author_url, category, published_on, body)
-  VALUES ($1, $2, $3, $4, $5, $6) WHERE article_id=$1;;
+  VALUES ($1, $2, $3, $4, $5, $6);
 `;
   let values = [
     request.body.title,
