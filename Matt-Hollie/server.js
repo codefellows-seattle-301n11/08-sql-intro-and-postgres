@@ -12,8 +12,7 @@ const app = express();
 
 // Mac:
 const conString = 'postgres://localhost:5432';
-const client = new pg.Client();
-// const client = new pg.Client(connectionString);
+const client = new pg.Client(conString);
 
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
@@ -36,8 +35,8 @@ app.get('/new-article', (request, response) => {
 // REVIEW: Routes for making API calls to use CRUD Operations on our database
 app.get('/articles', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE: This bit of code refers to step 1 and 5 of the diagram. Select is step one of the query, we are selecting all the articles as a response. the last bit app.post is step 5 (post) as a response. 
-  client.query('SELECT * FROM articles');
+  // PUT YOUR RESPONSE HERE: This bit of code refers to step 1 and 5 of the diagram. Select is step one of the query, we are selecting all the articles as a response. the last bit app.post is step 5 (post) as a response.
+  client.query('SELECT * FROM articles')
     .then(function(result) {
       response.send(result.rows);
     })
@@ -78,9 +77,8 @@ app.put('/articles/:id', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // PUT YOUR RESPONSE HERE this code correspondes to UPDATE, the code is allowing the user to send a query to update an article. it responds to 1, 2, 3, 4, 5,
 
-  let SQL = 'UPDATE articles SET title = $2, author = $3, author_url = $4, category = $5, published_on = $6, body = $7 WHERE article_id = $1';
-  
-  let values = [request.body.title, request.body.author, request.author_url, request.body.category, request.body.published_on, request.body.body request.params.id];
+  let SQL = 'UPDATE articles SET title = $2, author = $3, author_url = $4, category = $5, published_on = $6, body = $7 WHERE article_id = $1'
+  let values = [request.body.title, request.body.author, request.author_url, request.body.category, request.body.published_on, request.body.body, request.params.id];
 
   client.query(SQL, values)
     .then(() => {
@@ -162,7 +160,7 @@ function loadArticles() {
 
 function loadDB() {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE the bit of code refers to to step 2, and step 4. create is used to make a query and create a table if one does not exists. this is using 3 and 4 
+  // PUT YOUR RESPONSE HERE the bit of code refers to to step 2, and step 4. create is used to make a query and create a table if one does not exists. this is using 3 and 4
   client.query(`
     CREATE TABLE IF NOT EXISTS articles (
       article_id SERIAL PRIMARY KEY,
